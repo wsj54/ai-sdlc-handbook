@@ -1,0 +1,55 @@
+#!/bin/sh
+# pre-push：推送前自动递增项目版本号（SemVer，patch +1）。
+# 版本更新后自动提交并打 tag，然后中止本次推送，提示再次 push。
+
+set -e
+
+repo_root=$(git rev-parse --show-toplevel 2>/dev/null) || exit 0
+cd "$repo_root" || exit 0
+
+# 仓库还没有任何提交时，跳过版本更新
+if ! git rev-parse --verify HEAD >/dev/null 2>&1; then
+  exit 0
+fi
+
+if [ ! -f VERSION ]; then
+  echo "pre-push: 未找到 VERSION 文件，跳过版本更新。" >&2
+  exit 0
+fi
+
+version=$(tr -d '[:space:]' < VERSION)
+
+if ! printf '%s' "$version" | grep -Eq '^(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$'; then
+  echo "pre-push: VERSION 内容不是合法的 SemVer（当前值：$version）。" >&2
+  exit 1
+fi
+
+# 当前 HEAD 已经是带对应版本 tag 的发布提交，直接放行，避免重复递增
+if git describe --tags --exact-match HEAD 2>/dev/null | grep -qx "v$version"; then
+  exit 0
+fi
+
+major=${version%%.*}
+rest=${version#*.}
+minor=${rest%%.*}
+patch=${rest#*.}
+new_version="$major.$minor.$((patch + 1))"
+
+if git rev-parse -q --verify "refs/tags/v$new_version" >/dev/null; then
+  echo "pre-push: tag v$new_version 已存在，请手动检查版本号。" >&2
+  exit 1
+fi
+
+printf '%s\n' "$new_version" > VERSION
+git add VERSION
+git commit -m "chore(release): v$new_version" -- VERSION >/dev/null
+git tag -a "v$new_version" -m "Release v$new_version"
+
+cat >&2 <<EOF
+
+pre-push: 版本号已从 $version 更新为 $new_version，并已提交、打 tag v$new_version。
+pre-push: 本次推送已中止，请再次执行 git push --follow-tags 推送发布提交与 tag。
+
+EOF
+
+exit 1

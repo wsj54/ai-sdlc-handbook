@@ -1,0 +1,7 @@
+# 仅追踪 step* 目录与仓库基础设施
+/*
+!/step*/
+!/.gitignore
+!/.gitattributes
+!/.githooks/
+!/VERSION
