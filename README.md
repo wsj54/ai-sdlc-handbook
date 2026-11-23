@@ -43,21 +43,24 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
 
 ## 阶段路线图
 
-当前仓库已提供前三个阶段的技能与使用说明，后续阶段持续补充。
+当前仓库已提供前四个阶段的技能与使用说明，后续阶段持续补充。阶段划分以 [`整体流程预览.txt`](./整体流程预览.txt) 为准。
 
 | 阶段 | 状态 | 入口 | 主要产物 |
 | --- | --- | --- | --- |
 | 1. 原始需求整理 | 已提供 | [`requirement-enrichment`](./step1原始需求整理/requirement-enrichment/SKILL.md) → [`initial-requirements`](./step1原始需求整理/initial-requirements/SKILL.md) → [`initial-requirements-revision`](./step1原始需求整理/initial-requirements-revision/SKILL.md) | `RAW_REQUIREMENTS_BRIEF.md`、`INITIAL_REQUIREMENTS.md` |
-| 2. 开发模型选择与开发流程规划 | 已提供 | [`development-approach`](./step2开发模型选择与开发流程规划/development-approach/SKILL.md) | `DEVELOPMENT_APPROACH.md` |
-| 2.5 通用开发阶段适配与流程编排 | 占位 | [说明](./step2.5开发模型与通用开发阶段适配及流程编排/说明.txt) | 计划并入阶段 2 |
+| 2. 软件开发模型选择与开发流程规划 | 已提供 | [`development-approach`](./step2开发模型选择与开发流程规划/development-approach/SKILL.md) | `DEVELOPMENT_APPROACH.md` |
 | 3. 需求分析与范围管理 | 已提供 | [`requirements-analysis`](./step3需求分析与范围管理/requirements-analysis/SKILL.md) | `REQUIREMENTS.md`、待办与追溯文件 |
-| 4. 产品设计 | 规划中 | — | 用户流程、页面结构、交互原型 |
-| 5. 技术可行性与技术验证 | 规划中 | — | `TECHNICAL_VALIDATION.md` |
-| 6. 系统架构设计 | 规划中 | — | `ARCHITECTURE.md` |
-| 7. 开发计划与任务拆解 | 规划中 | — | `ROADMAP.md`、开发任务清单 |
-| 8. 编码实现 | 规划中 | — | 可运行、可验证的功能增量 |
-| 9. 验证与发布 | 规划中 | — | 测试记录、审查报告、可交付版本 |
-| 10. 运营与迭代 | 规划中 | — | 使用反馈、下一轮需求 |
+| 4. 初步可行性分析与风险识别 | 已提供 | [`feasibility-review`](./step4初步可行性分析与风险识别/feasibility-review/SKILL.md) | `FEASIBILITY_REVIEW.md` |
+| 5. 产品设计与交互原型 | 规划中 | — | 产品设计文档、交互原型 |
+| 6. 深入技术可行性分析与技术验证 | 规划中 | — | `TECHNICAL_VALIDATION.md` |
+| 7. 系统架构设计 | 规划中 | — | `ARCHITECTURE.md` |
+| 8. 开发计划与任务拆解 | 规划中 | — | `ROADMAP.md`、开发任务清单 |
+| 9. 编码实现 | 规划中 | — | 可运行、可验证的功能增量 |
+| 10. 测试与质量保障 | 规划中 | — | 测试记录、审查报告 |
+| 11. 部署与发布 | 规划中 | — | 可交付版本 |
+| 12. 运行维护与持续迭代 | 规划中 | — | 使用反馈、下一轮需求 |
+
+仓库中还保留 `step2.5`（通用开发阶段适配与流程编排）目录，当前为占位，计划并入阶段 2，不单独计入 12 个阶段。
 
 阶段之间允许回流，不是固定的瀑布模型。
 
@@ -91,6 +94,12 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
    请使用 requirements-analysis 技能，把我的原始需求整理成正式需求基线。
    ```
 
+6. **判断项目整体是否可行**：
+
+   ```text
+   使用 feasibility-review 技能，基于当前项目的需求文档做第四阶段可行性分析。
+   ```
+
 每个阶段都建议从对应的 `使用说明.md` 读起，里面写清了目标、操作步骤、产物、审核方式与常见误区。
 
 ## 仓库结构
@@ -98,6 +107,7 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
 ```text
 ai-sdlc-handbook/
 ├── README.md                          # 项目说明（本文件）
+├── 整体流程预览.txt                    # 全流程 12 个阶段总览
 ├── VERSION                            # 当前版本号（SemVer）
 ├── .githooks/
 │   └── pre-push                       # 推送前自动更新版本号
@@ -111,12 +121,15 @@ ai-sdlc-handbook/
 │   └── development-approach/          # 开发模型选择与流程规划
 ├── step2.5开发模型与通用开发阶段适配及流程编排/
 │   └── 说明.txt                       # 占位，后续并入阶段 2
-└── step3需求分析与范围管理/
+├── step3需求分析与范围管理/
+│   ├── 使用说明.md
+│   └── requirements-analysis/         # 需求分析与范围管理
+└── step4初步可行性分析与风险识别/
     ├── 使用说明.md
-    └── requirements-analysis/         # 需求分析与范围管理
+    └── feasibility-review/            # 初步可行性分析与风险识别
 ```
 
-当前仓库只追踪 `step*` 目录、`README.md` 与版本/钩子基础设施，其余本地研究素材暂未纳入版本控制。
+当前仓库只追踪 `step*` 目录、`README.md`、`整体流程预览.txt` 与版本/钩子基础设施，其余本地研究素材暂未纳入版本控制。
 
 ## 每个阶段怎么用
 
@@ -125,6 +138,7 @@ ai-sdlc-handbook/
 | 1. 原始需求整理 | [使用说明](./step1原始需求整理/使用说明.md) | 把零散想法变成结构化、无冲突的初始需求 | 你确认 `INITIAL_REQUIREMENTS.md` |
 | 2. 开发模型与流程 | [使用说明](./step2开发模型选择与开发流程规划/使用说明.md) | 选主开发模型、辅助实践和阶段门禁 | 你确认 `DEVELOPMENT_APPROACH.md` |
 | 3. 需求分析与范围 | [使用说明](./step3需求分析与范围管理/使用说明.md) | 划定 MVP、优先级、验收标准，形成需求基线 | 你确认 `REQUIREMENTS.md` |
+| 4. 初步可行性分析 | [使用说明](./step4初步可行性分析与风险识别/使用说明.md) | 判断项目整体是否值得推进、是否具备实施条件、有哪些重大风险 | 你确认 `FEASIBILITY_REVIEW.md` |
 
 每个阶段的技能都会分轮提问，每轮只问当前最阻塞的问题。只有你明确确认的内容才会被视为“已确认”，AI 的推荐只能作为“待定假设”。
 
