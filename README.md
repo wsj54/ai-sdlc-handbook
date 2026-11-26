@@ -43,7 +43,7 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
 
 ## 阶段路线图
 
-当前仓库已提供前四个阶段的技能与使用说明，后续阶段持续补充。阶段划分以 [`整体流程预览.txt`](./整体流程预览.txt) 为准。
+当前仓库已提供阶段 1–7 的技能与使用说明；阶段 8 已整理技能要求，技能待实现；阶段 9–12 持续补充。阶段划分以 [`整体流程预览.txt`](./整体流程预览.txt) 为准。
 
 | 阶段 | 状态 | 入口 | 主要产物 |
 | --- | --- | --- | --- |
@@ -51,10 +51,10 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
 | 2. 软件开发模型选择与开发流程规划 | 已提供 | [`development-approach`](./step2开发模型选择与开发流程规划/development-approach/SKILL.md) | `DEVELOPMENT_APPROACH.md` |
 | 3. 需求分析与范围管理 | 已提供 | [`requirements-analysis`](./step3需求分析与范围管理/requirements-analysis/SKILL.md) | `REQUIREMENTS.md`、待办与追溯文件 |
 | 4. 初步可行性分析与风险识别 | 已提供 | [`feasibility-review`](./step4初步可行性分析与风险识别/feasibility-review/SKILL.md) | `FEASIBILITY_REVIEW.md` |
-| 5. 产品设计与交互原型 | 规划中 | — | 产品设计文档、交互原型 |
-| 6. 深入技术可行性分析与技术验证 | 规划中 | — | `TECHNICAL_VALIDATION.md` |
-| 7. 系统架构设计 | 规划中 | — | `ARCHITECTURE.md` |
-| 8. 开发计划与任务拆解 | 规划中 | — | `ROADMAP.md`、开发任务清单 |
+| 5. 产品设计与交互原型 | 已提供 | [`product-design`](./step5产品设计与交互原型/product-design/SKILL.md) | `PRODUCT_DESIGN.md` |
+| 6. 深入技术可行性分析与技术验证 | 已提供 | [`technical-validation`](./step6深入技术可行性分析与技术验证/technical-validation/SKILL.md) | `TECHNICAL_VALIDATION.md`、验证证据 |
+| 7. 系统架构设计 | 已提供 | [`architecture-design`](./step7系统架构设计/architecture-design/SKILL.md) | `ARCHITECTURE.md`、ADR |
+| 8. 开发计划与任务拆解 | 需求已整理 | [技能要求](./step8开发计划与任务拆解/skill要求.md) | `ROADMAP.md`、开发任务清单 |
 | 9. 编码实现 | 规划中 | — | 可运行、可验证的功能增量 |
 | 10. 测试与质量保障 | 规划中 | — | 测试记录、审查报告 |
 | 11. 部署与发布 | 规划中 | — | 可交付版本 |
@@ -100,6 +100,24 @@ AI 改变了每个阶段的执行方式，但没有取消流程本身。真正�
    使用 feasibility-review 技能，基于当前项目的需求文档做第四阶段可行性分析。
    ```
 
+7. **设计产品页面与交互**：
+
+   ```text
+   请使用 product-design 技能，基于我的需求基线产出产品设计文档。
+   ```
+
+8. **验证关键技术**：
+
+   ```text
+   请使用 technical-validation 技能，基于当前项目文档做技术可行性分析与 PoC 验证。
+   ```
+
+9. **设计系统架构**：
+
+   ```text
+   请使用 architecture-design 技能，基于当前项目文档做系统架构设计。
+   ```
+
 每个阶段都建议从对应的 `使用说明.md` 读起，里面写清了目标、操作步骤、产物、审核方式与常见误区。
 
 ## 仓库结构
@@ -124,9 +142,21 @@ ai-sdlc-handbook/
 ├── step3需求分析与范围管理/
 │   ├── 使用说明.md
 │   └── requirements-analysis/         # 需求分析与范围管理
-└── step4初步可行性分析与风险识别/
-    ├── 使用说明.md
-    └── feasibility-review/            # 初步可行性分析与风险识别
+├── step4初步可行性分析与风险识别/
+│   ├── 使用说明.md
+│   └── feasibility-review/            # 初步可行性分析与风险识别
+├── step5产品设计与交互原型/
+│   ├── 使用说明.md
+│   └── product-design/                # 产品设计与交互蓝图
+├── step6深入技术可行性分析与技术验证/
+│   ├── 使用说明.md
+│   └── technical-validation/          # 技术调研、PoC 与验证
+├── step7系统架构设计/
+│   ├── 使用说明.md
+│   ├── 系统架构设计skill要求.txt
+│   └── architecture-design/           # 架构、技术栈、模块与接口
+└── step8开发计划与任务拆解/
+    └── skill要求.md                    # 技能要求，待实现
 ```
 
 当前仓库只追踪 `step*` 目录、`README.md`、`整体流程预览.txt` 与版本/钩子基础设施，其余本地研究素材暂未纳入版本控制。
@@ -139,6 +169,10 @@ ai-sdlc-handbook/
 | 2. 开发模型与流程 | [使用说明](./step2开发模型选择与开发流程规划/使用说明.md) | 选主开发模型、辅助实践和阶段门禁 | 你确认 `DEVELOPMENT_APPROACH.md` |
 | 3. 需求分析与范围 | [使用说明](./step3需求分析与范围管理/使用说明.md) | 划定 MVP、优先级、验收标准，形成需求基线 | 你确认 `REQUIREMENTS.md` |
 | 4. 初步可行性分析 | [使用说明](./step4初步可行性分析与风险识别/使用说明.md) | 判断项目整体是否值得推进、是否具备实施条件、有哪些重大风险 | 你确认 `FEASIBILITY_REVIEW.md` |
+| 5. 产品设计 | [使用说明](./step5产品设计与交互原型/使用说明.md) | 把需求转成页面结构、用户流程和交互蓝图 | 你确认 `PRODUCT_DESIGN.md` |
+| 6. 技术验证 | [使用说明](./step6深入技术可行性分析与技术验证/使用说明.md) | 验证关键技术、识别技术风险，给出架构约束 | 你确认 `TECHNICAL_VALIDATION.md` |
+| 7. 系统架构 | [使用说明](./step7系统架构设计/使用说明.md) | 确定架构风格、技术栈、模块、数据与接口 | 你确认 `ARCHITECTURE.md` |
+| 8. 开发计划 | [技能要求](./step8开发计划与任务拆解/skill要求.md) | 拆分开发板块与任务，规划多 Agent 协作与执行路线 | 技能待实现 |
 
 每个阶段的技能都会分轮提问，每轮只问当前最阻塞的问题。只有你明确确认的内容才会被视为“已确认”，AI 的推荐只能作为“待定假设”。
 
